@@ -1,0 +1,9 @@
+-std=c2x
+-Wall
+-Wextra
+-Wpedantic
+-Wstrict-prototypes
+-I
+build/_deps/raylib-src/src
+-I
+build/_deps/raygui-src/src

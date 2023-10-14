@@ -8,4 +8,4 @@ struct alphabet {
 
 void add_alphabet_letter(char letter);
 
-void remove_alphabet_letter(usize index);
+void remove_alphabet_letter(usize idx);

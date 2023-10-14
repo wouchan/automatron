@@ -14,7 +14,7 @@ static char letter_box_text[128] = "LETTER";
 static bool letter_box_edit_mode = false;
 static int alphabet_list_index = 0;
 static int alphabet_list_active = 0;
-static char alphabet_list_buffer[512] = "\0";
+static char alphabet_list_buffer[512] = { 0 };
 
 void draw_alphabet_box(void) {
     GuiGroupBox((Rectangle) { 8, 8, 152, 304 }, "Alphabet");
@@ -32,14 +32,7 @@ void draw_alphabet_box(void) {
     }
 
     // list of alphabet letters
-    usize buffer_size = 1;
-    usize letters_num = strlen(alphabet.letters);
-    if (letters_num != 0) {
-        buffer_size = letters_num + (letters_num - 1);
-    }
-
-    generate_alphabet_list(buffer_size);
-
+    generate_alphabet_list();
     alphabet_list_active = GuiListView(
         (Rectangle) { 16, 80, 136, 192 }, alphabet_list_buffer, &alphabet_list_index,
         alphabet_list_active
@@ -51,11 +44,14 @@ void draw_alphabet_box(void) {
     }
 }
 
-void generate_alphabet_list(usize buffer_size) {
-    for (usize i = 0, j = 0; i < strlen(alphabet.letters); i += 1, j += 2) {
+void generate_alphabet_list(void) {
+    usize len = strlen(alphabet.letters);
+
+    for (usize i = 0, j = 0; i < len; i += 1, j += 2) {
         alphabet_list_buffer[j] = alphabet.letters[i];
         alphabet_list_buffer[j + 1] = ';';
     }
 
+    usize buffer_size = (len > 0) ? (len * 2 - 1) : 0;
     alphabet_list_buffer[buffer_size] = '\0';
 }

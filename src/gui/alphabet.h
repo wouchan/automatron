@@ -4,4 +4,4 @@
 
 void draw_alphabet_box(void);
 
-void generate_alphabet_list(usize buffer_size);
+void generate_alphabet_list(void);

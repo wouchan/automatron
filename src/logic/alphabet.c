@@ -17,14 +17,14 @@ void add_alphabet_letter(char letter) {
     alphabet.letters[len] = letter;
 }
 
-void remove_alphabet_letter(usize index) {
-    if (index == 0 || index >= 256) {
+void remove_alphabet_letter(usize idx) {
+    if (idx == 0 || idx >= 256) {
         return;
     }
 
     usize len = strlen(alphabet.letters);
 
-    for (usize i = index; i < len - 1; i += 1) {
+    for (usize i = idx; i < len - 1; i += 1) {
         alphabet.letters[i] = alphabet.letters[i + 1];
     }
 

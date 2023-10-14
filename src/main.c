@@ -10,28 +10,28 @@
 #include "gui/alphabet.h"
 #include "gui/grammar.h"
 #include "gui/language.h"
-#include "logic/util.h"
+
+static const int SCREEN_WIDTH = 1300;
+static const int SCREEN_HEIGHT = 700;
+
+void main_loop(void) {
+    BeginDrawing();
+    {
+        ClearBackground(RAYWHITE);
+
+        draw_alphabet_box();
+        draw_grammar_box();
+        draw_language_box();
+    }
+    EndDrawing();
+}
 
 int main() {
-    const int screen_width = 1300;
-    const int screen_height = 700;
-
-    // SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    init_program();
-    InitWindow(screen_width, screen_height, "Automatron");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Automatron");
 
     while (!WindowShouldClose()) {
-        BeginDrawing();
-        {
-            ClearBackground(RAYWHITE);
-
-            draw_alphabet_box();
-            draw_grammar_box();
-            draw_language_box();
-        }
-        EndDrawing();
+        main_loop();
     }
 
     CloseWindow();
-    deinit_program();
 }

@@ -12,6 +12,7 @@ extern struct alphabet alphabet;
 
 static char letter_box_text[128] = "LETTER";
 static bool letter_box_edit_mode = false;
+static bool terminal_checked = false;
 static int alphabet_list_index = 0;
 static int alphabet_list_active = 0;
 static char alphabet_list_buffer[512] = { 0 };
@@ -24,10 +25,12 @@ void draw_alphabet_box(void) {
         letter_box_edit_mode = !letter_box_edit_mode;
     }
 
-    // add button
-    if (GuiButton((Rectangle) { 16, 48, 136, 24 }, "Add")) {
+    // terminal and add buttons
+    terminal_checked = GuiCheckBox((Rectangle) { 16, 48, 24, 24 }, "Terminal", terminal_checked);
+
+    if (GuiButton((Rectangle) { 96, 48, 56, 24 }, "Add")) {
         if (strlen(letter_box_text) == 1) {
-            add_alphabet_letter(*letter_box_text);
+            add_alphabet_letter(*letter_box_text, terminal_checked);
         }
     }
 
@@ -47,11 +50,18 @@ void draw_alphabet_box(void) {
 void generate_alphabet_list(void) {
     usize len = strlen(alphabet.letters);
 
-    for (usize i = 0, j = 0; i < len; i += 1, j += 2) {
-        alphabet_list_buffer[j] = alphabet.letters[i];
-        alphabet_list_buffer[j + 1] = ';';
+    usize idx = 0;
+    for (usize i = 0; i < len; i += 1) {
+        if (alphabet.terminals[i]) {
+            memcpy(&alphabet_list_buffer[idx], "* ", 2);
+            idx += 2;
+        }
+
+        alphabet_list_buffer[idx] = alphabet.letters[i];
+        alphabet_list_buffer[idx + 1] = ';';
+
+        idx += 2;
     }
 
-    usize buffer_size = (len > 0) ? (len * 2 - 1) : 0;
-    alphabet_list_buffer[buffer_size] = '\0';
+    alphabet_list_buffer[idx - 1] = '\0';
 }

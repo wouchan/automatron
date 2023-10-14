@@ -11,3 +11,5 @@ struct grammar {
 void add_grammar_rule(char * input, char * output);
 
 void remove_grammar_rule(usize idx);
+
+bool apply_grammar_rule(char * word, usize start_idx, usize rule_idx);

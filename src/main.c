@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "raylib.h"
 
 #define RAYGUI_IMPLEMENTATION
@@ -5,27 +7,31 @@
 #undef RAYGUI_IMPLEMENTATION
 
 #include "defs.h"
-
-struct alphabet {
-    char * letters;
-    usize size;
-};
+#include "gui/alphabet.h"
+#include "gui/grammar.h"
+#include "gui/language.h"
+#include "logic/util.h"
 
 int main() {
-    const int screen_width = 800;
-    const int screen_height = 450;
+    const int screen_width = 1300;
+    const int screen_height = 700;
 
+    // SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    init_program();
     InitWindow(screen_width, screen_height, "Automatron");
 
     while (!WindowShouldClose()) {
         BeginDrawing();
+        {
+            ClearBackground(RAYWHITE);
 
-        ClearBackground(RAYWHITE);
-
-        DrawText("Hello world!", 190, 200, 20, LIGHTGRAY);
-
+            draw_alphabet_box();
+            draw_grammar_box();
+            draw_language_box();
+        }
         EndDrawing();
     }
 
     CloseWindow();
+    deinit_program();
 }

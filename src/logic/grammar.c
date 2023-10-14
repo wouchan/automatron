@@ -60,7 +60,7 @@ void remove_grammar_rule(usize idx) {
 }
 
 bool apply_grammar_rule(char * word, usize start_idx, usize rule_idx) {
-    usize len = strlen(word);
+    isize len = strlen(word);
     isize input_len = strlen(grammar.inputs[rule_idx]);
     isize output_len = strlen(grammar.outputs[rule_idx]);
 
@@ -72,17 +72,17 @@ bool apply_grammar_rule(char * word, usize start_idx, usize rule_idx) {
     }
 
     if (offset > 0) {
-        for (isize i = 0, j = len + offset - 1; i < offset; i += 1, j -= 1) {
-            word[j] = word[j - offset];
+        for (isize i = len + offset - 1; i > (isize) start_idx + output_len - 1; i -= 1) {
+            word[i] = word[i - offset];
         }
 
         word[len + offset] = '\0';
     } else if (offset < 0) {
-        for (isize i = 0, j = start_idx + input_len + offset + 1; i < -offset; i += 1, j += 1) {
-            word[j] = word[j - offset];
+        for (isize i = start_idx + input_len + offset; i < len + offset; i += 1) {
+            word[i] = word[i - offset];
         }
 
-        word[len - offset] = '\0';
+        word[len + offset] = '\0';
     }
 
     memcpy(&word[start_idx], grammar.outputs[rule_idx], output_len);

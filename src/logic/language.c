@@ -40,25 +40,32 @@ void apply_possible_rules(void) {
         }
 
         for (usize w = 0; w < queues[active_queue].len; w += 1) {
-            for (usize i = 0; i < grammar.len; i += 1) {
-                usize input_len = strlen(grammar.inputs[i]);
+            for (usize rule_idx = 0; rule_idx < grammar.len; rule_idx += 1) {
+                usize input_len = strlen(grammar.inputs[rule_idx]);
+                isize max_idx = strlen(queues[active_queue].words[w]) - input_len + 1;
 
-                for (                                                          //
-                    usize j = 0;                                               //
-                    j < strlen(queues[active_queue].words[w]) - input_len + 1; //
-                    j += 1                                                     //
-                ) {                                                            //
-                    if (                                                       //
-                        memcmp(grammar.inputs[i], &queues[active_queue].words[w][j], input_len) ==
-                        0 //
-                    ) {   //
+                for (                            //
+                    usize start_idx = 0;         //
+                    (isize) start_idx < max_idx; //
+                    start_idx += 1               //
+                ) {                              //
+                    if (                         //
+                        memcmp(
+                            grammar.inputs[rule_idx], &queues[active_queue].words[w][start_idx],
+                            input_len
+                        ) == 0 //
+                    ) {        //
                         char new_word[WORD_SIZE];
                         strcpy(new_word, queues[active_queue].words[w]);
-                        if (!apply_grammar_rule(new_word, j, i)) {
+                        if (!apply_grammar_rule(new_word, start_idx, rule_idx)) {
                             break;
                         }
 
                         if (!add_language_word(new_word)) {
+                            if (queue_contains_word(new_word, active_queue)) {
+                                continue;
+                            }
+
                             if (!add_to_word_queue(new_word, !active_queue)) {
                                 continue;
                             }
@@ -84,15 +91,23 @@ void generate_language(void) {
     apply_possible_rules();
 }
 
+bool queue_contains_word(char * word, bool queue_idx) {
+    for (usize i = 0; i < queues[queue_idx].len; i += 1) {
+        if (strcmp(queues[queue_idx].words[i], word) == 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool add_to_word_queue(char * word, bool queue_idx) {
     if (queues[queue_idx].len >= QUEUE_SIZE) {
         return false;
     }
 
-    for (usize i = 0; i < queues[queue_idx].len; i += 1) {
-        if (strcmp(queues[queue_idx].words[i], word) == 0) {
-            return true;
-        }
+    if (queue_contains_word(word, queue_idx)) {
+        return true;
     }
 
     strcpy(queues[queue_idx].words[queues[queue_idx].len], word);

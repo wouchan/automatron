@@ -14,7 +14,7 @@ static char letter_box_text[128] = "LETTER";
 static bool letter_box_edit_mode = false;
 static bool terminal_checked = false;
 static int alphabet_list_index = 0;
-static int alphabet_list_active = 0;
+static int alphabet_list_active = -1;
 static char alphabet_list_buffer[512] = { 0 };
 
 void draw_alphabet_box(void) {

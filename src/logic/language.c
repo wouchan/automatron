@@ -12,7 +12,7 @@ struct language language = { .words = { { 0 } }, .len = 0 };
 static struct word_queue queues[2] = { 0 };
 static bool active_queue = 0;
 
-#define MAX_ITERATIONS 1024
+#define MAX_ITERATIONS 4096
 
 bool add_language_word(char * word) {
     for (usize i = 0; i < strlen(word); i += 1) {

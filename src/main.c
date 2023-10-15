@@ -8,11 +8,12 @@
 
 #include "defs.h"
 #include "gui/alphabet.h"
+#include "gui/automaton.h"
 #include "gui/grammar.h"
 #include "gui/language.h"
 
-static const int SCREEN_WIDTH = 1300;
-static const int SCREEN_HEIGHT = 700;
+static const int SCREEN_WIDTH = 1200;
+static const int SCREEN_HEIGHT = 640;
 
 void main_loop(void) {
     BeginDrawing();
@@ -22,6 +23,7 @@ void main_loop(void) {
         draw_alphabet_box();
         draw_grammar_box();
         draw_language_box();
+        draw_automaton_box();
     }
     EndDrawing();
 }

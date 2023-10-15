@@ -16,7 +16,7 @@ static bool input_edit_mode = false;
 static char output_text[128] = "OUTPUT";
 static bool output_edit_mode = false;
 static int rules_list_index = 0;
-static int rules_list_active = 0;
+static int rules_list_active = -1;
 static char rules_list_buffer[2048] = { 0 };
 
 void draw_grammar_box(void) {

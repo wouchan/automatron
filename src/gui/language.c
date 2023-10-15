@@ -11,7 +11,7 @@
 extern struct language language;
 
 static int words_list_index = 0;
-static int words_list_active = 0;
+static int words_list_active = -1;
 static char language_list_buffer[8192] = { 0 };
 
 void draw_language_box(void) {

@@ -3,38 +3,36 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct alphabet alphabet = { .letters = { 'S' }, .terminals = { 0 } };
+struct alphabet alphabet = { 0 };
 
-void add_alphabet_letter(char letter, bool terminal) {
-    usize len = strlen(alphabet.letters);
-
-    for (usize i = 0; i < len; i += 1) {
+void add_alphabet_letter(char letter) {
+    for (usize i = 0; i < alphabet.len; i += 1) {
         if (letter == alphabet.letters[i]) {
             return;
         }
     }
 
-    alphabet.letters[len] = letter;
-    alphabet.terminals[len] = terminal;
+    alphabet.letters[alphabet.len] = letter;
+    alphabet.terminals[alphabet.len] = false;
+
+    alphabet.len += 1;
 }
 
 void remove_alphabet_letter(usize idx) {
-    if (idx == 0 || idx >= 128) {
+    if (idx >= alphabet.len) {
         return;
     }
 
-    usize len = strlen(alphabet.letters);
-
-    for (usize i = idx; i < len - 1; i += 1) {
+    for (usize i = idx; i < alphabet.len - 1; i += 1) {
         alphabet.letters[i] = alphabet.letters[i + 1];
         alphabet.terminals[i] = alphabet.terminals[i + 1];
     }
 
-    alphabet.letters[len - 1] = '\0';
+    alphabet.len -= 1;
 }
 
 bool is_in_alphabet(char letter) {
-    for (usize i = 0; i < strlen(alphabet.letters); i += 1) {
+    for (usize i = 0; i < alphabet.len; i += 1) {
         if (letter == alphabet.letters[i]) {
             return true;
         }
@@ -44,7 +42,7 @@ bool is_in_alphabet(char letter) {
 }
 
 bool is_terminal(char letter) {
-    for (usize i = 0; i < strlen(alphabet.letters); i += 1) {
+    for (usize i = 0; i < alphabet.len; i += 1) {
         if (letter == alphabet.letters[i]) {
             return alphabet.terminals[i];
         }

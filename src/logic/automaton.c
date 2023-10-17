@@ -12,6 +12,7 @@ void add_automaton_state(char * name) {
     }
 
     strcpy(automaton.states[automaton.len], name);
+
     automaton.len += 1;
 }
 

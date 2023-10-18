@@ -31,8 +31,9 @@ void draw_diagram_box(void) {
     Vector2 center = { 336.0 + 528.0 - 528.0 / 2.0, 16.0 + 448.0 - 448.0 / 2.0 };
     static const f32 CIRCLE_DISTANCE = 100.0;
 
-    f32 start_x = center.x - CIRCLE_DISTANCE * (circles_in_row / 2);
-    f32 start_y = center.y - CIRCLE_DISTANCE * (circles_in_row / 2);
+    usize circles_in_row_halved = circles_in_row / 2;
+    f32 start_x = center.x - CIRCLE_DISTANCE * circles_in_row_halved;
+    f32 start_y = center.y - CIRCLE_DISTANCE * circles_in_row_halved;
     if (circles_in_row % 2 == 0) {
         start_x += CIRCLE_DISTANCE * 0.5;
         start_y += CIRCLE_DISTANCE * 0.5;

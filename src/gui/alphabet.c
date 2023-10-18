@@ -10,7 +10,7 @@
 
 extern struct alphabet alphabet;
 
-static char letter_box_text[128] = "LETTER";
+static char letter_box_text[128] = "SYMBOL";
 static bool letter_box_edit_mode = false;
 static int alphabet_list_index = 0;
 static int alphabet_list_active = -1;
@@ -27,7 +27,7 @@ void draw_alphabet_box(void) {
     // add button
     if (GuiButton((Rectangle) { 16, 48, 136, 24 }, "Add")) {
         if (strlen(letter_box_text) == 1) {
-            add_alphabet_letter(*letter_box_text);
+            add_alphabet_symbol(*letter_box_text);
         }
     }
 
@@ -47,7 +47,7 @@ void draw_alphabet_box(void) {
 
     // removal button
     if (GuiButton((Rectangle) { 16, 280, 136, 24 }, "Remove selected")) {
-        remove_alphabet_letter(alphabet_list_active);
+        remove_alphabet_symbol(alphabet_list_active);
     }
 }
 
@@ -64,7 +64,7 @@ void generate_alphabet_list(void) {
             idx += 2;
         }
 
-        alphabet_list_buffer[idx] = alphabet.letters[i];
+        alphabet_list_buffer[idx] = alphabet.symbols[i];
         alphabet_list_buffer[idx + 1] = ';';
 
         idx += 2;

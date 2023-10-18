@@ -5,35 +5,35 @@
 
 struct alphabet alphabet = { 0 };
 
-void add_alphabet_letter(char letter) {
+void add_alphabet_symbol(char symbol) {
     for (usize i = 0; i < alphabet.len; i += 1) {
-        if (letter == alphabet.letters[i]) {
+        if (symbol == alphabet.symbols[i]) {
             return;
         }
     }
 
-    alphabet.letters[alphabet.len] = letter;
+    alphabet.symbols[alphabet.len] = symbol;
     alphabet.terminals[alphabet.len] = false;
 
     alphabet.len += 1;
 }
 
-void remove_alphabet_letter(usize idx) {
+void remove_alphabet_symbol(usize idx) {
     if (idx >= alphabet.len) {
         return;
     }
 
     for (usize i = idx; i < alphabet.len - 1; i += 1) {
-        alphabet.letters[i] = alphabet.letters[i + 1];
+        alphabet.symbols[i] = alphabet.symbols[i + 1];
         alphabet.terminals[i] = alphabet.terminals[i + 1];
     }
 
     alphabet.len -= 1;
 }
 
-bool is_in_alphabet(char letter) {
+bool is_in_alphabet(char symbol) {
     for (usize i = 0; i < alphabet.len; i += 1) {
-        if (letter == alphabet.letters[i]) {
+        if (symbol == alphabet.symbols[i]) {
             return true;
         }
     }
@@ -41,9 +41,9 @@ bool is_in_alphabet(char letter) {
     return false;
 }
 
-bool is_terminal(char letter) {
+bool is_terminal(char symbol) {
     for (usize i = 0; i < alphabet.len; i += 1) {
-        if (letter == alphabet.letters[i]) {
+        if (symbol == alphabet.symbols[i]) {
             return alphabet.terminals[i];
         }
     }

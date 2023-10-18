@@ -2,4 +2,4 @@
 
 Tool for working with formal languages and state machines.
 
-![](https://wouchan.github.io/automatron/assets/screenshot.png)
+![](https://raw.githubusercontent.com/wouchan/automatron/master/assets/screenshot.png)

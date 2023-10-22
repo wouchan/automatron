@@ -34,5 +34,5 @@ target_include_directories(raygui INTERFACE ${raygui_SOURCE_DIR}/src)
 
 ### Compile-related options
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_compile_options(${PROJECT_NAME} PRIVATE -g -O0 -Wall -Wextra -Wpedantic -Wstrict-prototypes)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wstrict-prototypes)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib raygui)

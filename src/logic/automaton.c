@@ -2,16 +2,21 @@
 
 #include <string.h>
 
+// Global automaton instance.
 struct automaton automaton = { .states = { { 0 } }, .accepted = { false }, .start = -1, .len = 0 };
 
-void add_automaton_state(char * name) {
+void add_automaton_state(char * label) {
+    if (automaton.len >= AUTOMATON_SIZE) {
+        return;
+    }
+
     for (usize i = 0; i < automaton.len; i += 1) {
-        if (strcmp(name, automaton.states[i]) == 0) {
+        if (strcmp(label, automaton.states[i]) == 0) {
             return;
         }
     }
 
-    strcpy(automaton.states[automaton.len], name);
+    strcpy(automaton.states[automaton.len], label);
 
     automaton.len += 1;
 }

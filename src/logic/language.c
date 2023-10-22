@@ -15,6 +15,10 @@ static bool active_queue = 0;
 #define MAX_ITERATIONS 4096
 
 bool add_language_word(char * word) {
+    if (language.len >= LANGUAGE_SIZE) {
+        return true;
+    }
+
     for (usize i = 0; i < strlen(word); i += 1) {
         if (!is_terminal(word[i])) {
             return false;

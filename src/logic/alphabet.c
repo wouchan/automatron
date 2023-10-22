@@ -3,9 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Global alphabet instance.
 struct alphabet alphabet = { 0 };
 
 void add_alphabet_symbol(char symbol) {
+    if (alphabet.len >= ALPHABET_SIZE) {
+        return;
+    }
+
     for (usize i = 0; i < alphabet.len; i += 1) {
         if (symbol == alphabet.symbols[i]) {
             return;

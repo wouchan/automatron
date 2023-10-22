@@ -5,13 +5,13 @@
 
 #include "raygui.h"
 #include "raylib.h"
+#include "raymath.h"
 
 #include "../defs.h"
 #include "../gui/diagram.h"
 #include "../logic/alphabet.h"
 #include "../logic/automaton.h"
 #include "../logic/transitions.h"
-#include "raymath.h"
 
 extern struct alphabet alphabet;
 extern struct automaton automaton;

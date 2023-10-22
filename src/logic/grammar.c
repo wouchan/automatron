@@ -7,6 +7,10 @@
 struct grammar grammar = { .inputs = { { 0 } }, .outputs = { { 0 } }, .len = 0 };
 
 void add_grammar_rule(char * input, char * output) {
+    if (grammar.len >= GRAMMAR_SIZE) {
+        return;
+    }
+
     for (usize i = 0; i < strlen(input); i += 1) {
         if (!is_in_alphabet(input[i])) {
             return;

@@ -1,6 +1,5 @@
 #include "language.h"
 
-#include <complex.h>
 #include <string.h>
 
 #include "alphabet.h"
